@@ -2,6 +2,24 @@
 
 面向 AI 算法 / 全栈开发岗位的可运行工程：道路视觉检测、交通时序异常识别、事件处置、数据集标注和服务拆分。新版扩展垃圾杂物、积水、油渍、坑洞的标注、训练、评估和图片/视频分析链路。
 
+## 演示动画
+
+完整操作流程：接入指标 → 时序异常识别 → WebSocket 实时推送 → 事件 AI 分析 → 各功能页巡检。
+
+![RoadWatch 演示动画](docs/images/demo.gif)
+
+## 界面截图
+
+| 运行总览 · 实时地图 · 车速曲线 | 事件处置 · AI 智能分析 |
+|---|---|
+| ![运行总览](docs/images/shot-overview.png) | ![事件AI分析](docs/images/shot-event-ai.png) |
+| **事件队列**(WebSocket 实时推送新事件) | **监测点管理与指标接入** |
+| ![事件队列](docs/images/shot-events.png) | ![监测点管理](docs/images/shot-sources.png) |
+| **图片异步检测** | **视频流实时检测** |
+| ![图片检测](docs/images/shot-inference.png) | ![视频检测](docs/images/shot-video.png) |
+| **数据集与框选标注** | |
+| ![数据集标注](docs/images/shot-datasets.png) | |
+
 ## 快速开始（Windows）
 
 需要 Python 3.11 或更新版本。已有 `.venv` 可直接启动；首次安装运行：
