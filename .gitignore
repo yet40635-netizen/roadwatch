@@ -1,0 +1,55 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Secrets and local config
+.env
+.env.local
+
+# Runtime data
+data/
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+
+# ML artifacts
+models/*
+!models/.gitkeep
+runs/
+.test-runs/
+runs_dataset/
+*.pt
+!app.pt
+_backups/
+datasets/
+
+# Recordings and demo artifacts
+*.mp4
+*.avi
+*.webm
+demo_frames/
+demo_video_raw/
+.stop_recording
+
+# Archives
+*.zip
+
+# One-off local screen-recording helpers
+scripts/record_screen.py
+scripts/record_window.py
+scripts/trim_video.py
+scripts/make_demo_video.py
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

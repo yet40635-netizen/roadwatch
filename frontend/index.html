@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="RoadWatch 道路事件监测、识别与处置平台">
+<title>RoadWatch · 道路事件工作台</title>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="/assets/styles.css"><script type="module" src="/assets/app.js"></script>
+</head><body>
+<aside class="sidebar">
+<a class="brand" href="/"><span class="brand-icon">R</span><span>RoadWatch<small>道路事件工作台</small></span></a>
+<div class="nav-caption">工作空间</div>
+<nav aria-label="主导航">
+<button data-view="monitor" class="nav active"><span>◉</span>运行总览</button>
+<button data-view="inference" class="nav"><span>▧</span>图片检测</button>
+<button data-view="video" class="nav"><span>◉</span>视频实时检测</button>
+<button data-view="datasets" class="nav"><span>▤</span>数据集与标注</button>
+<button data-view="sources" class="nav"><span>⌖</span>监测点管理</button>
+<button data-view="training" class="nav"><span>◇</span>AI 训练工作流</button><a class="nav" href="/docs" target="_blank" rel="noopener"><span>↗</span>接口文档</a></nav>
+<div class="sidebar-bottom"><span class="dot"></span> 本地工作空间<small>RoadWatch / v1.0</small></div></aside>
+<main>
+<header><div><span class="eyebrow">TRAFFIC OPERATIONS</span><h1 id="page-title">运行总览</h1></div><div class="header-actions"><span id="last-updated">正在连接</span><button id="refresh" class="secondary">刷新数据</button></div></header>
+<div id="notice" class="notice" role="status" hidden></div>
+<details class="connection"><summary>连接设置</summary><form id="auth-form" class="inline-form"><label>API 密钥<input id="api-key" type="password" autocomplete="off" placeholder="本地默认无需密钥"></label><button>保存并连接</button></form></details>
+<section id="view-monitor" class="view">
+<div class="section-line"><p>追踪道路异常，完成事件确认与处置。</p><button id="seed" class="secondary">载入演示数据</button></div>
+<div class="stats">
+<article><span>监测点</span><strong id="stat-sources">—</strong><small>已接入数据源</small></article>
+<article><span>待处置事件</span><strong id="stat-open">—</strong><small>待确认与处理中</small></article>
+<article><span>高优先级</span><strong id="stat-high" class="danger-text">—</strong><small>待处置的高优先级事件</small></article>
+<article><span>检测任务</span><strong id="stat-jobs">—</strong><small>排队与执行中</small></article></div>
+<div class="monitor-grid">
+<article class="panel"><div class="panel-heading"><h2>监测点分布</h2><span class="muted">实时地图</span></div><div id="map" class="leaflet-map" aria-label="监测点地图"></div><p class="caption">点击标记查看趋势；红色表示有待处置事件。</p></article>
+<article class="panel"><div class="panel-heading"><h2>车速与基线</h2><select id="metric-source" aria-label="选择趋势监测点"></select></div><div class="legend"><span><i class="green"></i>实际车速</span><span><i class="gray"></i>正常基线</span><span>km/h</span></div><canvas id="chart" aria-label="车速时序曲线"></canvas><p id="chart-caption" class="caption">选择监测点后显示最近 60 条记录。</p></article></div>
+<article class="panel events-panel"><div class="panel-heading"><h2>事件队列 <span id="event-count" class="count">0</span></h2><div class="filters"><select id="status-filter" aria-label="筛选事件状态"><option value="">全部状态</option><option value="open">待确认</option><option value="acknowledged">处理中</option><option value="resolved">已解决</option><option value="dismissed">已排除</option></select><select id="kind-filter" aria-label="筛选事件类型"><option value="">全部类型</option><option value="water">积水</option><option value="obstacle">障碍物</option><option value="accident">事故</option><option value="pothole">坑洞</option><option value="oil">油渍</option><option value="garbage">垃圾杂物</option><option value="congestion">拥堵</option><option value="speed_drop">异常降速</option></select></div></div>
+<div class="table-scroll"><table><thead><tr><th>事件</th><th>监测点</th><th>发生时间</th><th>优先级</th><th>来源</th><th>状态</th><th>操作</th></tr></thead><tbody id="events-body"></tbody></table></div><div class="pagination"><button id="prev" class="secondary">上一页</button><span id="page-info"></span><button id="next" class="secondary">下一页</button></div></article>
+</section>
+<section id="view-inference" class="view" hidden>
+<div class="two-column"><article class="panel"><h2>提交道路图片</h2><p class="muted">支持 JPEG、PNG、WebP，最大 10 MiB / 20 MP。</p><form id="inference-form" class="stack"><label>监测点<select id="inference-source" required></select></label><label class="upload-zone">选择图片<input id="inference-file" type="file" accept="image/jpeg,image/png,image/webp" required></label><button>创建检测任务</button></form><div id="job-status" class="result-note" aria-live="polite">可识别类别：垃圾杂物、积水、油渍、坑洞、道路障碍、事故。默认演示模式返回固定框；真实识别需加载训练权重。</div></article>
+<article class="panel"><div class="panel-heading"><h2>检测结果</h2><span id="inference-mode" class="badge"></span></div><canvas id="inference-canvas" class="image-canvas" aria-label="图片与检测框"></canvas><div id="detections"></div></article></div>
+<article class="panel"><h2>最近任务</h2><div id="jobs-list" class="list"></div></article></section>
+<section id="view-video" class="view" hidden>
+<article class="panel"><h2>视频实时目标检测</h2>
+<p class="muted">支持本地视频文件或摄像头。按设定间隔抽帧并调用检测模型，实时叠加检测框。</p>
+<form id="video-form" class="stack">
+<label>视频源<select id="video-source-type"><option value="file">视频文件</option><option value="camera">摄像头</option></select></label>
+<label id="video-file-label">选择视频<input id="video-file" type="file" accept="video/*"></label>
+<label class="inline-form">抽帧间隔（秒）<input id="video-interval" type="number" min="0.1" step="0.1" value="1.0"></label>
+<label class="inline-form">置信度阈值<input id="video-conf" type="number" min="0.01" max="1" step="0.05" value="0.4"></label>
+<button id="video-start" type="button">开始检测</button>
+<button id="video-stop" type="button" class="secondary" hidden>停止</button>
+</form>
+<div id="video-status" class="result-note" aria-live="polite">尚未开始。</div>
+</article>
+<article class="panel"><div class="panel-heading"><h2>检测画面</h2><span id="video-mode" class="badge"></span></div>
+<video id="video-player" class="image-canvas" muted playsinline></video>
+<canvas id="video-canvas" class="image-canvas" hidden aria-label="检测叠加层"></canvas>
+<div id="video-detections" class="result-note"></div>
+</article></section>
+<section id="view-datasets" class="view" hidden>
+<div class="two-column dataset-layout"><article class="panel"><h2>数据集</h2><form id="dataset-form" class="stack"><label>名称<input id="dataset-name" required maxlength="100" placeholder="例如：道路积水一期"></label><label>描述<input id="dataset-description" maxlength="2000" placeholder="采集场景、摄像头或日期范围"></label><button>创建数据集</button></form><div id="datasets-list" class="list"></div></article>
+<article class="panel"><div class="panel-heading"><h2 id="dataset-title">选择数据集</h2><button id="export-dataset" class="secondary" disabled>导出 YOLO 数据集</button></div><form id="dataset-upload" class="inline-form"><label>添加图片<input id="dataset-file" type="file" accept="image/jpeg,image/png,image/webp" required></label><button id="upload-dataset-button" disabled>上传</button></form><div id="images-list" class="image-list"></div></article></div>
+<article class="panel"><div class="panel-heading"><h2>框选标注</h2><div class="filters"><select id="annotation-label" aria-label="标注类别"><option value="water">积水</option><option value="obstacle">障碍物</option><option value="accident">事故</option><option value="pothole">坑洞</option><option value="oil">油渍</option><option value="garbage">垃圾杂物</option></select><select id="annotation-split" aria-label="数据划分"><option value="train">训练集</option><option value="val">验证集</option><option value="test">测试集</option></select><button id="undo-box" class="secondary">撤销最后一框</button><button id="save-annotations" disabled>保存标注</button></div></div><p class="caption">选择图片后拖动绘制矩形；同一摄像头连续帧应放在同一划分，避免数据泄漏。</p><canvas id="annotation-canvas" class="image-canvas annotation" aria-label="拖动框选标注区域"></canvas><p id="annotation-count" class="caption">尚未选择图片。</p></article></section>
+<section id="view-sources" class="view" hidden>
+<div class="two-column"><article class="panel"><h2>新增监测点</h2><form id="source-form" class="stack"><label>名称<input name="name" required maxlength="100" placeholder="路段名称"></label><label>纬度<input name="latitude" type="number" step="any" min="-90" max="90" required value="22.2858"></label><label>经度<input name="longitude" type="number" step="any" min="-180" max="180" required value="114.158"></label><label>初始正常车速（km/h）<input name="baseline_speed" type="number" min="1" max="200" required value="60"></label><button>创建监测点</button></form></article><article class="panel"><h2>已接入监测点</h2><div id="sources-list" class="list"></div></article></div>
+<article class="panel"><h2>接入交通指标</h2><p class="muted">提交一次交通指标并进行异常计算；异常结果会进入事件队列。</p><form id="metric-form" class="inline-form"><label>监测点<select id="ingest-source" required></select></label><label>车速 km/h<input name="speed" type="number" min="0" max="250" step="0.1" value="15" required></label><label>拥堵指数 0–1<input name="congestion" type="number" min="0" max="1" step="0.01" value="0.9" required></label><label>车辆数<input name="volume" type="number" min="0" max="100000" value="50" required></label><button>提交当前指标</button></form><p id="metric-result" aria-live="polite"></p></article></section>
+<section id="view-training" class="view" hidden>
+<article class="panel training-intro"><span class="eyebrow">ROAD VISION / MODEL WORKFLOW</span><h2>从道路样本到可部署模型</h2><p>垃圾杂物 · 积水 · 油渍 · 坑洞 · 道路障碍 · 事故</p><p class="muted">使用自己的道路图片和视频帧训练模型，保留独立测试集评估效果。当前演示框不代表模型能力。</p></article>
+<div class="training-steps"><article class="panel"><span class="step-number">01</span><h2>采集与标注</h2><p>创建数据集并上传真实道路图片，拖动框选目标。按摄像头和采集日期划分训练、验证和测试集。</p><a href="/guide/ALGORITHMS.md" target="_blank">查看样本准备规范 ↗</a></article>
+<article class="panel"><span class="step-number">02</span><h2>训练与评估</h2><p>导出 YOLO 数据集，运行数据检查、训练和测试集评估脚本。重点检查油渍与积水的混淆和小型垃圾漏检。</p><code>python scripts/ml.py train --weights models/base.pt --data datasets/roads/data.yaml</code></article>
+<article class="panel"><span class="step-number">03</span><h2>部署与复核</h2><p>将经过评估的权重保存为 road.pt，启用真实模型模式。图片与视频抽帧任务共用事件处置流程。</p><code>DETECTOR_MODE=yolo<br>MODEL_PATH=./models/road.pt</code></article></div>
+<article class="panel"><h2>交付文档</h2><div class="document-links"><a href="/guide/flows.html" target="_blank">系统流程图 ↗</a><a href="/guide/API.md" target="_blank">完整接口文档 ↗</a><a href="/guide/ALGORITHMS.md" target="_blank">训练与视频接入 ↗</a><a href="/guide/DEPLOYMENT.md" target="_blank">部署说明 ↗</a></div></article></section>
+<footer>RoadWatch <span>交通事件监测与处置</span><a href="/docs" target="_blank" rel="noopener">OpenAPI / 在线调试 ↗</a></footer></main>
+<dialog id="event-dialog"><form method="dialog"><button class="close secondary" aria-label="关闭">×</button></form><h2 id="event-title"></h2><p id="event-description"></p><div id="event-image"></div><div id="ai-analysis-section" style="display:none"><h3>🤖 AI 智能分析</h3><div id="ai-analysis-content" style="background:var(--surface);border:1px solid var(--border);padding:12px;border-radius:8px;white-space:pre-wrap;font-size:14px"></div><button id="ai-regenerate" class="secondary" style="margin-top:8px">重新生成分析</button></div><h3>处置记录</h3><div id="event-actions"></div><label>处置备注<textarea id="action-note" maxlength="1000" rows="3" placeholder="记录核查情况或处置结果"></textarea></label><div id="event-buttons" class="dialog-actions"></div></dialog>
+</body></html>

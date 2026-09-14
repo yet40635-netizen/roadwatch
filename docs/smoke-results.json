@@ -1,0 +1,13 @@
+{
+  "http_workflow": "passed: auth, metric, event transitions, actual HTTP worker/detector, docs",
+  "video_workflow": "passed: 3 real decoded video frames through HTTP inference in demo mode",
+  "overview_load_test": {
+    "requests": 100,
+    "concurrency": 10,
+    "errors": 0,
+    "rps": 274.49,
+    "p50_ms": 30.64,
+    "p95_ms": 99.92
+  },
+  "compose": "YAML and service structure parsed; Docker runtime not available"
+}

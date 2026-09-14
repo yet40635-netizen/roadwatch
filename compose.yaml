@@ -1,0 +1,70 @@
+name: roadwatch
+x-app: &app
+  image: roadwatch:local
+  build: .
+  environment: &environment
+    DATABASE_URL: postgresql+psycopg://roadwatch:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@db:5432/roadwatch
+    DATA_DIR: /app/data
+    API_KEY: ${API_KEY:?Set API_KEY}
+    DEMO_ENABLED: ${DEMO_ENABLED:-true}
+    DETECTOR_URL: http://detector:8011
+    EVENT_COOLDOWN_SECONDS: 120
+    JOB_LEASE_SECONDS: 180
+  volumes:
+    - roadwatch-data:/app/data
+  restart: unless-stopped
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: roadwatch
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_DB: roadwatch
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U roadwatch -d roadwatch"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+  migrate:
+    <<: *app
+    command: [python, -m, alembic, upgrade, head]
+    restart: "no"
+    depends_on:
+      db:
+        condition: service_healthy
+  api:
+    <<: *app
+    ports: ["127.0.0.1:8010:8010"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8010/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  detector:
+    <<: *app
+    environment:
+      <<: *environment
+      DETECTOR_MODE: demo
+    command: [python, -m, uvicorn, "inference.main:app", --host, "0.0.0.0", --port, "8011"]
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8011/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  worker:
+    <<: *app
+    command: [python, -m, backend.worker]
+    depends_on:
+      api:
+        condition: service_healthy
+      detector:
+        condition: service_healthy
+volumes:
+  postgres-data:
+  roadwatch-data:

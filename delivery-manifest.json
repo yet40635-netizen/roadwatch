@@ -1,0 +1,251 @@
+{
+  "version": "1.0.0",
+  "delivered_at": "2026-09-13T21:20:59.2088238+08:00",
+  "backup": "D:\\openai\\_test\\_backups\\before-roadwatch-v1-20260913-212058",
+  "files": [
+    {
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "path": "backend\\__init__.py"
+    },
+    {
+      "sha256": "635C2F3E00183465ECD317EE45D0C822FA350102E86817132931A8E075B0942B",
+      "path": "backend\\anomaly.py"
+    },
+    {
+      "sha256": "227371D49753D43D60FC259EA7CFEFFFC444FBBEFA1979A55A9394721D83346B",
+      "path": "backend\\catalog.py"
+    },
+    {
+      "sha256": "06BB442B376B37B493497C2FE4E327CC28D0227FF016B9E8C9918EA0FC944A5B",
+      "path": "backend\\config.py"
+    },
+    {
+      "sha256": "054F5500EDDB0724C205A557DE5BA78D02586E40D361BAAC7DA673B6F631BEFB",
+      "path": "backend\\db.py"
+    },
+    {
+      "sha256": "684F33F1E1B74FEED8C4386AA186D9AE72D2449D06E1A8A6B4169EC16B482187",
+      "path": "backend\\main.py"
+    },
+    {
+      "sha256": "B336E852EC84D95DD3741AE98B119C3B4D4F5A8BA9A186018181E8FFB510553C",
+      "path": "backend\\models.py"
+    },
+    {
+      "sha256": "A10E1EC07D96EF12ABCDA7D782DB711F7095CF73475927E3305125C2DBAE45E5",
+      "path": "backend\\schemas.py"
+    },
+    {
+      "sha256": "7334CD908CE284EBEBAAE0C64D54125B48FBE48B79214E4A1FEF8BFE7ABB055B",
+      "path": "backend\\seed.py"
+    },
+    {
+      "sha256": "99B380F3215B62E21F6002C70CAA42374EA2734E8AEDAD1ED50198290F4A35AB",
+      "path": "backend\\services.py"
+    },
+    {
+      "sha256": "49A63B078FF7ADA83E1611DB67BEEE4ACC31F34517D8EB5048713027B5AC8373",
+      "path": "backend\\worker.py"
+    },
+    {
+      "sha256": "C57A72B16390C648A7737408D800ACE9C877414659B656DC5F711A75074A4AD5",
+      "path": "frontend\\app.js"
+    },
+    {
+      "sha256": "3C5A7BCEA003D4E3DE0C14E0825045D7AB18A6480AD7B980A2963B2F3FE8EA77",
+      "path": "frontend\\favicon.svg"
+    },
+    {
+      "sha256": "721A7B1D9CD20204BCCF824720E15C6BF276CDA9F61D49E98B2C7E33E21663B1",
+      "path": "frontend\\index.html"
+    },
+    {
+      "sha256": "57A24123AE1F819C5DF66EB1E0E530AA9CD1D8358DFF7AA2DEFA97403209AD13",
+      "path": "frontend\\styles.css"
+    },
+    {
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "path": "inference\\__init__.py"
+    },
+    {
+      "sha256": "EE495881CDB7CE4C353E5B8CBB2ADE04CC173AFA4B8E69B47FBD8797B2FB9A0B",
+      "path": "inference\\main.py"
+    },
+    {
+      "sha256": "7403C5139FECCA5A185BCA070BBBFAD6A5D946A32E750F2717CFC1DEB3523724",
+      "path": "scripts\\check_dataset.py"
+    },
+    {
+      "sha256": "6BB7861D96A21904A0773EA3C8DEA1C1DF90E2EA94B5D22D1EE12AD6ADC0F9AF",
+      "path": "scripts\\dev.py"
+    },
+    {
+      "sha256": "AF53F040B3A8182129EC8402F28720412E5CFF0B4A4296272DFC52253E6FD038",
+      "path": "scripts\\export_openapi.py"
+    },
+    {
+      "sha256": "5FE3800A8CA6F9B139707978BA5F90ABDE24731C0EF9279C88F07F9B4A9E4ACB",
+      "path": "scripts\\load_test.py"
+    },
+    {
+      "sha256": "5756B6AAC4791D1C3AF770D3B8EE1755402193FF0EDAE872F6FFD5763DC4C7F0",
+      "path": "scripts\\ml.py"
+    },
+    {
+      "sha256": "62BB3DC0BAF39CB21D69A72A382522A4E54333C5FE685B8602324E3FFFC9EA57",
+      "path": "scripts\\video_ingest.py"
+    },
+    {
+      "sha256": "649D134930A75A6B69CA9457D58D59C4D6B685232AE09236057A7D70C7B85C42",
+      "path": "tests\\conftest.py"
+    },
+    {
+      "sha256": "5571196A0F47884AB271C77E415D542F74859BDF10CFA30F8D67825E83FC0576",
+      "path": "tests\\test_anomaly.py"
+    },
+    {
+      "sha256": "40533E4E5AAC850E4D643A986E7AFF6AE05C523609D97874565D29711D910656",
+      "path": "tests\\test_api.py"
+    },
+    {
+      "sha256": "1226B389AF3F11CDAAEA9F0175FC15AE7710BF563C3646CEDA9A623ECD1CADC4",
+      "path": "tests\\test_extended.py"
+    },
+    {
+      "sha256": "5A85BF53A16E2281E21728F9DB9B1525D49733163613D1C0BF3A3E45E148F8AF",
+      "path": "tests\\test_worker.py"
+    },
+    {
+      "sha256": "31AF47DF8848F143A37766CD719081D7A2C6B8B00D6F07E0B6B602168D51D9C1",
+      "path": "docs\\ALGORITHMS.md"
+    },
+    {
+      "sha256": "8A94D3586152DA9AB89D01DFF460F158C599828A60E34679F779AAE2308623C5",
+      "path": "docs\\API-guide.md"
+    },
+    {
+      "sha256": "5CD72C96D08824023D1B509B01AC79784CA1B7816DA29B3F570117B7B7AF19E5",
+      "path": "docs\\API.md"
+    },
+    {
+      "sha256": "62CA780CC402AFEA445721694228F9A791E978C30959AF84FFF9CF915F9FF81C",
+      "path": "docs\\ARCHITECTURE.md"
+    },
+    {
+      "sha256": "16ADDBFF7A6796C7F9D0937EFF02BD745E3524166A476183A0F2F42831A90773",
+      "path": "docs\\DATABASE.md"
+    },
+    {
+      "sha256": "B6F178B7B3D7B9A9C49EA5BDD4959AAEF095D3A7EE6B6984C7181AE9B9C906EA",
+      "path": "docs\\DATASET_GUIDE.md"
+    },
+    {
+      "sha256": "B70E781EEF12A080959ED0C45945D4C9F7E5479FF8B82B614B15AE9F78CB67B9",
+      "path": "docs\\DEPLOYMENT.md"
+    },
+    {
+      "sha256": "F2163D685E33620DFAA09B7F11A6257F11D8C428D2EBD7D5D8AF1638FECEB0EE",
+      "path": "docs\\flows.html"
+    },
+    {
+      "sha256": "2D6FB8933E6B9A2DA7EDEE12A2D3CCC2E551C21DAF87D59BB620B912F1CAC253",
+      "path": "docs\\inference-openapi.json"
+    },
+    {
+      "sha256": "301D230570BD49CEF32E51358EB45D58ADEB29571455FF517B55D8AD12A66188",
+      "path": "docs\\openapi.json"
+    },
+    {
+      "sha256": "8FEC84DA4D4ED8DCEAA81DCEE1F5B276A4910F8830DFB1FEBCCB8ED8337B3CC3",
+      "path": "docs\\schema.postgresql.sql"
+    },
+    {
+      "sha256": "0692833365FCAC8D3785409CA819B9782B7B6F90E84E45050A43983C796CCEF9",
+      "path": "docs\\smoke-results.json"
+    },
+    {
+      "sha256": "16CEAD3ED0D336DD6450D41F8A34D7AFEEB7722C0284D788F43596CF965DF745",
+      "path": "docs\\VALIDATION.md"
+    },
+    {
+      "sha256": "FF0B08C7F0370F37643B734BF5F35FDE038A9B241C9E039AF092484976535D9E",
+      "path": "migrations\\env.py"
+    },
+    {
+      "sha256": "D7558DCB7CE01D3E44830898336D3027DE66E5FFDB1491C0CD27F6159B021902",
+      "path": "migrations\\script.py.mako"
+    },
+    {
+      "sha256": "90FBDE104BB38DFC09DDA7AB964BD2DB531E8110A76E6654DD7A2369BEFBC3B6",
+      "path": "migrations\\versions\\0001_initial.py"
+    },
+    {
+      "sha256": "7E7D442DC31D9BF6DBAE82532B9CFA31A1AE5AF1F5B70EFF4DA025E0669E432F",
+      "path": "models\\MODEL_CARD.md"
+    },
+    {
+      "sha256": "1B98FAFDE0B3DE64358C2B57E2EE474CB5C622C227AC40A4DE812E48195D89D4",
+      "path": "models\\README.md"
+    },
+    {
+      "sha256": "BD15A6F98088EB8351CFC2B532CF5754D1B5D1C327FAC6F894E2A671710C2E7E",
+      "path": "README.md"
+    },
+    {
+      "sha256": "113E00C159910EE00CD6F1262766AC7CA1202FFAA599E8EC1D1C4D68A4684465",
+      "path": "pyproject.toml"
+    },
+    {
+      "sha256": "F43394E6D017505871DB8FAEA51D17EAEA8D82A81FAA77F5B2CE08AB1E94F20E",
+      "path": "requirements.lock.txt"
+    },
+    {
+      "sha256": "B0F051C186A9475614F30EFC1AC05736C7AB56226000CAAF9C25110D720CD7F3",
+      "path": "requirements-ml.txt"
+    },
+    {
+      "sha256": "E7955A0FFB9C32A9C5067D7885EE9197328F17A4A12FB4A5BB556C2B85763AA2",
+      "path": "alembic.ini"
+    },
+    {
+      "sha256": "D4AF429D35D00D107B9F63DC79D7C87BFA7B585F4017840F2BC6322B0D730AB7",
+      "path": "Dockerfile"
+    },
+    {
+      "sha256": "8DBE761634B10B595C7D89042DA80E5A1D5F3ABA63778F7E603B5B2F1EAA75D0",
+      "path": "Dockerfile.ml"
+    },
+    {
+      "sha256": "9E4B878018CA3E70CF62B2596A6C70DF6ADC66FF1EAC85F5066F4BBC3FD0C474",
+      "path": "compose.yaml"
+    },
+    {
+      "sha256": "71F7E3E86B3BE1E32F55BD0FA7B597D5C6D2A53A94BC2725290EBE2151D7CADB",
+      "path": "compose.ml.yaml"
+    },
+    {
+      "sha256": "BEB820DCAE3A83CD1220C0317551D0D481527DD455A0435592A95023F1531164",
+      "path": "setup.ps1"
+    },
+    {
+      "sha256": "547B44200EF63B9C233C585FF57789F3B8E50D6AB053F88D072EE930081BC15E",
+      "path": "start.ps1"
+    },
+    {
+      "sha256": "33A7CBC87723C30ABCC2D1E36EF48C75936BE74B5BDEFCAA1DC4BF5C1916BD78",
+      "path": "test.ps1"
+    },
+    {
+      "sha256": "8F76093211D62F5CBD0ED95F0EA279B3B9C177AF6678341DEB538AB9D5C5470D",
+      "path": ".env.example"
+    },
+    {
+      "sha256": "8CAD115231C04309756B59806B72E43CC262B7500ECCB3D9E74ACB1744F40729",
+      "path": ".gitignore"
+    },
+    {
+      "sha256": "8822CF4E9C9EEAAE7F8FB214FBC79DAB8B290BDA19F5F07D0173013FDF848A6A",
+      "path": ".dockerignore"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+services:
+  detector:
+    image: roadwatch-ml:local
+    build:
+      context: .
+      dockerfile: Dockerfile.ml
+    environment:
+      DETECTOR_MODE: yolo
+      MODEL_PATH: /app/models/road.pt
+      MODEL_DEVICE: cpu
+    volumes:
+      - ./models:/app/models:ro
